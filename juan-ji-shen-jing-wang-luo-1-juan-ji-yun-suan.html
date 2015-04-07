@@ -5,8 +5,8 @@
         <meta charset="utf-8"> 
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="author" content="Alexis Métaireau" />
-        <meta name="copyright" content="Alexis Métaireau" />
+        <meta name="author" content="LCY.Seso" />
+        <meta name="copyright" content="LCY.Seso" />
 		
 <head>
     <title>Title</title>
@@ -35,21 +35,21 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="thats, awesome, yeah, " />
+<meta name="keywords" content="Deep learning, CNN, Deep learning, " />
 
-<meta property="og:title" content="My super title "/>
-<meta property="og:url" content="/my-super-title.html" />
+<meta property="og:title" content="卷积神经网络(1)——卷积运算 "/>
+<meta property="og:url" content="/juan-ji-shen-jing-wang-luo-1-juan-ji-yun-suan.html" />
 <meta property="og:description" content="Short version for index and feeds" />
 <meta property="og:site_name" content="" />
-<meta property="og:article:author" content="Alexis Métaireau" />
-<meta property="og:article:published_time" content="2012-07-09T22:28:00+02:00" />
-<meta property="" content="2012-07-10T20:14:00+02:00" />
-<meta name="twitter:title" content="My super title ">
+<meta property="og:article:author" content="LCY.Seso" />
+<meta property="og:article:published_time" content="2014-07-18T22:28:00+02:00" />
+<meta property="" content="2014-07-18T22:28:00+02:00" />
+<meta name="twitter:title" content="卷积神经网络(1)——卷积运算 ">
 <meta name="twitter:description" content="Short version for index and feeds">
-<meta property="og:image" content="http://www.lovecaoying.com/blog/wp-content/uploads/2014/07/lowpass-filter-300x104.jpg" />
-<meta name="twitter:image" content="http://www.lovecaoying.com/blog/wp-content/uploads/2014/07/lowpass-filter-300x104.jpg" >
+<meta property="og:image" content="images/140718_4-300x128.jpg" />
+<meta name="twitter:image" content="images/140718_4-300x128.jpg" >
 
-        <title>My super title  · 
+        <title>卷积神经网络(1)——卷积运算  · 
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
@@ -88,7 +88,7 @@
 <article>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="/my-super-title.html"> My super title  </a></h1>
+    <h1><a href="/juan-ji-shen-jing-wang-luo-1-juan-ji-yun-suan.html"> 卷积神经网络(1)——卷积运算  </a></h1>
     </header>
 </div>
 
@@ -99,8 +99,6 @@
             
 		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 		</script>
-	
-        This is the content of my super blog post.
 		
 		<p>
 			<span style="font-size:16px;"><span style="font-family:times new roman,times,serif;"><span data-wiz-span="data-wiz-span"><span data-wiz-span="data-wiz-span">之前断断续续看了一些神经网络相关的内容，马上也要开始全新的阶段，以后还是不时会动动&ldquo;笔&rdquo;，不管简单还是复杂，写点儿东西。</span></span></span></span>
@@ -181,7 +179,7 @@
 			</div>
 
 			<div>
-				<a href="http://www.lovecaoying.com/blog/wp-content/uploads/2014/07/lowpass-filter.jpg"><img alt="lowpass filter" class="alignnone size-medium wp-image-1054" height="104" src="http://www.lovecaoying.com/blog/wp-content/uploads/2014/07/lowpass-filter-300x104.jpg" width="300" /></a>
+				<a href="images/lowpass-filter.jpg"><img alt="lowpass filter" class="alignnone size-medium wp-image-1054" height="104" src="images/lowpass-filter.jpg" /></a>
 			</div>
 
 			<div>
@@ -194,7 +192,7 @@
 				</div>
 
 				<div>
-					<a href="http://www.lovecaoying.com/blog/wp-content/uploads/2014/07/highpass-filter.jpg"><img alt="highpass filter" class="alignnone size-medium wp-image-1053" height="104" src="http://www.lovecaoying.com/blog/wp-content/uploads/2014/07/highpass-filter-300x104.jpg" width="300" /></a>
+					<a href="images/highpass-filter.jpg"><img alt="highpass filter" class="alignnone size-medium wp-image-1053" height="104" src="images/highpass-filter.jpg" /></a>
 				</div>
 
 				<div>
@@ -211,7 +209,7 @@
 			</div>
 
 			<div>
-				<a href="http://www.lovecaoying.com/blog/wp-content/uploads/2014/07/3.jpg"><img alt="3" class="alignnone size-medium wp-image-1055" height="104" src="http://www.lovecaoying.com/blog/wp-content/uploads/2014/07/3-300x104.jpg" width="300" /></a>
+				<a href="images/140718_3.jpg"><img alt="3" class="alignnone size-medium wp-image-1055" height="104" src="images/140718_3.jpg" /></a>
 			</div>
 
 			<div>
@@ -224,7 +222,7 @@
 
 			<div>
 				<div>
-					<a href="http://www.lovecaoying.com/blog/wp-content/uploads/2014/07/4.jpg"><img alt="4" class="alignnone size-medium wp-image-1056" height="128" src="http://www.lovecaoying.com/blog/wp-content/uploads/2014/07/4-300x128.jpg" width="300" /></a>
+					<a href="images/140718_4.jpg"><img alt="4" class="alignnone size-medium wp-image-1056" height="128" src="images/140718_4.jpg" /></a>
 				</div>
 
 				<div>
@@ -240,7 +238,7 @@
 				</div>
 
 				<div>
-					<a href="http://www.lovecaoying.com/blog/wp-content/uploads/2014/07/5.jpg"><img alt="5" class="alignnone size-medium wp-image-1057" height="80" src="http://www.lovecaoying.com/blog/wp-content/uploads/2014/07/5-300x80.jpg" width="300" /></a>
+					<a href="images/140718_5.jpg"><img alt="5" class="alignnone size-medium wp-image-1057" height="80" src="images/140718_5.jpg" /></a>
 				</div>
 
 				<div>
@@ -267,14 +265,11 @@
 					<span style="font-family: 'times new roman', times, serif; font-size: 16px; line-height: 1.6em;">下图各个子图从上到下，从左到右分别是，原图，原图与滤波模板\(k_1\)至\(k_8\)卷积的结果。</span>
 				</p>
 
-				<p>
-					&nbsp;
-				</p>
 			</div>
 
 			<div>
 				<p>
-					<a href="http://www.lovecaoying.com/blog/wp-content/uploads/2014/07/6.jpg"><img alt="6" class="alignnone size-medium wp-image-1058" height="243" src="http://www.lovecaoying.com/blog/wp-content/uploads/2014/07/6-300x243.jpg" width="300" /></a>
+					<a href="images/140718_6.jpg"><img alt="6" class="alignnone size-medium wp-image-1058" height="243" src="images/140718_6.jpg" /></a>
 				</p>
 
 				<p>
@@ -331,20 +326,20 @@
         <section>
         <div class="span2" style="float:right;font-size:0.9em;">
             <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2012-07-09T22:28:00+02:00">七月 9, 2012</time>
+            <time pubdate="pubdate" datetime="2014-07-18T22:28:00+02:00">七月 18, 2014</time>
 
 <h4>Last Updated</h4>
-<time datetime="2012-07-10T20:14:00+02:00">七月 10, 2012</time>
+<time datetime="2014-07-18T22:28:00+02:00">七月 18, 2014</time>
 
             <h4>Category</h4>
-            <a class="category-link" href="/categories.html#yeah-ref">yeah</a>
+            <a class="category-link" href="/categories.html#deep-learning-ref">Deep learning</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="/tags.html#awesome-ref">awesome
-                    <span>3</span>
+                <li><a href="/tags.html#cnn-ref">CNN
+                    <span>1</span>
 </a></li>
-                <li><a href="/tags.html#thats-ref">thats
-                    <span>3</span>
+                <li><a href="/tags.html#deep-learning-ref">Deep learning
+                    <span>1</span>
 </a></li>
             </ul>
 <h4>Contact</h4>
