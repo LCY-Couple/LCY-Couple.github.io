@@ -34,18 +34,20 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="Python, Python, " />
+<meta name="keywords" content="Python, Whoosh, Python, " />
 
-<meta property="og:title" content="用Cython加速Python程序的一个简单例子 "/>
-<meta property="og:url" content="/yong-cythonjia-su-pythoncheng-xu-de-yi-ge-jian-dan-li-zi.html" />
-<meta property="og:description" content="用Cython加速Python程序的一个简单例子¶ Python是我们非常喜欢的一种语言，我们的LOGO中的“L”就是一条代表了Python的蛇 :) 然而，由于Python本身的语言特性，使得它在特定的情况下会出现速度瓶颈，本文就使用Cython做一个简单的例子，说明如何使用C和Python的混合（这大概并不是精确意义下的混合编程）达到优化Python程序的目的。 几点说明：¶ 本文大量参考了参考文献[1] 本文的写作环境使用Python 2.7, IPython Notebook 1.1.0, Cython 0.17.2和Windows 7 64bit 为了展示方便，本文并没有描述如何在实际开发环境中编译和使用Cython模块，请参考官方文档（http://docs.cython.org/src/tutorial/cython_tutorial.html） Cython、Numba、PyPy等都可以用于优化Python程序的运行效率，numpy等专门进行科学计算的模块本身也会有优化，请不要把自己的思路限制在这里 Cython实际上是一种新的编程语言，主要用于开发Python扩展模块，我们基于Cython所做的优化，本质是使用了Cython这种编程语言编写了融合C和Python风格的程序，然后通过编译称为程序模块，如其官方文档所说：[Cython] is a programming language that makes writing C extensions for the Python language as easy as Python itself. It aims to become a superset of the [Python] language which gives it high-level, object-oriented, functional, and dynamic programming. Its main feature on top of these is support for optional static type declarations as part of the language. The source code gets translated into optimized C/C++ code and compiled as Python extension modules. This allows for both very fast program execution and tight integration with external C libraries, while keeping up the high programmer productivity for which the Python language is well known. [2]" />
+<meta property="og:title" content="使用Whoosh实现简单的文本检索 "/>
+<meta property="og:url" content="/shi-yong-whooshshi-xian-jian-dan-de-wen-ben-jian-suo.html" />
+<meta property="og:description" content="使用Whoosh实现简单的文本检索¶文本检索是很多NLP任务的重要组成部分，也是信息检索（IR, Information Retrieval）领域的重要研究问题。本文并不考虑复杂的NLP任务，也不考虑IR研究中涉及的复杂问题，仅从“简单够用”的角度，给出一种实现参考。 这里用到了开源软件Whoosh，这是一个Python实现的搜索服务框架，此处使用的是Whoosh 2.6.0版本。 测试用到的语料是PFR人民日报语料库，通过预处理我只保留了分词结果。在后面的测试中，我认为每一个完整的句子（句号分隔）是一条记录。 （不要在意这些细节，这只是个简单的示例^(*￣(oo)￣)^） ① 设定Whoosh的Schema¶这个Schema指定了记录的标题、内容、标识符等信息的类型，由于我们的目标是文本检索，所以标题和内容都是TEXT，Schema还有很多别的设定，比如可以设定记录的关键字等等。 变量ix是搜索的关键：索引。" />
 <meta property="og:site_name" content="LCY Data Science Couple" />
 <meta property="og:article:author" content="LCY.Hugepanda" />
-<meta property="og:article:published_time" content="2015-04-14T12:36:55+02:00" />
-<meta name="twitter:title" content="用Cython加速Python程序的一个简单例子 ">
-<meta name="twitter:description" content="用Cython加速Python程序的一个简单例子¶ Python是我们非常喜欢的一种语言，我们的LOGO中的“L”就是一条代表了Python的蛇 :) 然而，由于Python本身的语言特性，使得它在特定的情况下会出现速度瓶颈，本文就使用Cython做一个简单的例子，说明如何使用C和Python的混合（这大概并不是精确意义下的混合编程）达到优化Python程序的目的。 几点说明：¶ 本文大量参考了参考文献[1] 本文的写作环境使用Python 2.7, IPython Notebook 1.1.0, Cython 0.17.2和Windows 7 64bit 为了展示方便，本文并没有描述如何在实际开发环境中编译和使用Cython模块，请参考官方文档（http://docs.cython.org/src/tutorial/cython_tutorial.html） Cython、Numba、PyPy等都可以用于优化Python程序的运行效率，numpy等专门进行科学计算的模块本身也会有优化，请不要把自己的思路限制在这里 Cython实际上是一种新的编程语言，主要用于开发Python扩展模块，我们基于Cython所做的优化，本质是使用了Cython这种编程语言编写了融合C和Python风格的程序，然后通过编译称为程序模块，如其官方文档所说：[Cython] is a programming language that makes writing C extensions for the Python language as easy as Python itself. It aims to become a superset of the [Python] language which gives it high-level, object-oriented, functional, and dynamic programming. Its main feature on top of these is support for optional static type declarations as part of the language. The source code gets translated into optimized C/C++ code and compiled as Python extension modules. This allows for both very fast program execution and tight integration with external C libraries, while keeping up the high programmer productivity for which the Python language is well known. [2]">
+<meta property="og:article:published_time" content="2015-04-15T11:02:00+02:00" />
+<meta name="twitter:title" content="使用Whoosh实现简单的文本检索 ">
+<meta name="twitter:description" content="使用Whoosh实现简单的文本检索¶文本检索是很多NLP任务的重要组成部分，也是信息检索（IR, Information Retrieval）领域的重要研究问题。本文并不考虑复杂的NLP任务，也不考虑IR研究中涉及的复杂问题，仅从“简单够用”的角度，给出一种实现参考。 这里用到了开源软件Whoosh，这是一个Python实现的搜索服务框架，此处使用的是Whoosh 2.6.0版本。 测试用到的语料是PFR人民日报语料库，通过预处理我只保留了分词结果。在后面的测试中，我认为每一个完整的句子（句号分隔）是一条记录。 （不要在意这些细节，这只是个简单的示例^(*￣(oo)￣)^） ① 设定Whoosh的Schema¶这个Schema指定了记录的标题、内容、标识符等信息的类型，由于我们的目标是文本检索，所以标题和内容都是TEXT，Schema还有很多别的设定，比如可以设定记录的关键字等等。 变量ix是搜索的关键：索引。">
+<meta property="og:image" content="images/150415-feature.png" />
+<meta name="twitter:image" content="images/150415-feature.png" >
 
-        <title>用Cython加速Python程序的一个简单例子  · LCY Data Science Couple
+        <title>使用Whoosh实现简单的文本检索  · LCY Data Science Couple
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
@@ -84,7 +86,7 @@
 <article>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="/yong-cythonjia-su-pythoncheng-xu-de-yi-ge-jian-dan-li-zi.html"> 用Cython加速Python程序的一个简单例子  </a></h1>
+    <h1><a href="/shi-yong-whooshshi-xian-jian-dan-de-wen-ben-jian-suo.html"> 使用Whoosh实现简单的文本检索  </a></h1>
     </header>
 </div>
 
@@ -243,7 +245,10 @@ table.dataframe th, td {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="用Cython加速Python程序的一个简单例子">用Cython加速Python程序的一个简单例子<a class="anchor-link" href="#用Cython加速Python程序的一个简单例子">¶</a></h1>
+<h2 id="使用Whoosh实现简单的文本检索">使用Whoosh实现简单的文本检索<a class="anchor-link" href="#使用Whoosh实现简单的文本检索">¶</a></h2><p>文本检索是很多NLP任务的重要组成部分，也是信息检索（IR, Information Retrieval）领域的重要研究问题。本文并不考虑复杂的NLP任务，也不考虑IR研究中涉及的复杂问题，仅从“简单够用”的角度，给出一种实现参考。</p>
+<p>这里用到了开源软件<a href="http://pythonhosted.org/Whoosh/intro.html" title="Whoosh">Whoosh</a>，这是一个Python实现的搜索服务框架，此处使用的是Whoosh 2.6.0版本。</p>
+<p>测试用到的语料是<a href="http://www.icl.pku.edu.cn/icl_groups/corpus/dwldform1.asp" title="PFR人民日报语料库">PFR人民日报语料库</a>，通过预处理我只保留了分词结果。在后面的测试中，我认为每一个完整的句子（句号分隔）是一条记录。</p>
+<p>（不要在意这些细节，这只是个简单的示例^(*￣(oo)￣)^）</p>
 </div>
 </div>
 </div>
@@ -252,228 +257,154 @@ table.dataframe th, td {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Python是我们非常喜欢的一种语言，我们的LOGO中的“L”就是一条代表了Python的蛇 :)</p>
-<p>然而，由于Python本身的语言特性，使得它在特定的情况下会出现速度瓶颈，本文就使用Cython做一个简单的例子，说明如何使用C和Python的混合（这大概并不是精确意义下的混合编程）达到优化Python程序的目的。</p>
-<h3 id="几点说明：">几点说明：<a class="anchor-link" href="#几点说明：">¶</a></h3><ul>
-<li>本文大量参考了参考文献[1]</li>
-<li>本文的写作环境使用Python 2.7, IPython Notebook 1.1.0, Cython 0.17.2和Windows 7 64bit</li>
-<li>为了展示方便，本文并没有描述如何在实际开发环境中编译和使用Cython模块，请参考官方文档（<a href="http://docs.cython.org/src/tutorial/cython_tutorial.html）">http://docs.cython.org/src/tutorial/cython_tutorial.html）</a></li>
-<li>Cython、Numba、PyPy等都可以用于优化Python程序的运行效率，numpy等专门进行科学计算的模块本身也会有优化，请不要把自己的思路限制在这里</li>
-<li>Cython实际上是一种新的编程语言，主要用于开发Python扩展模块，我们基于Cython所做的优化，本质是使用了Cython这种编程语言编写了融合C和Python风格的程序，然后通过编译称为程序模块，如其官方文档所说：[Cython] is a programming language that makes writing C extensions for the Python language as easy as Python itself. It aims to become a superset of the [Python] language which gives it high-level, object-oriented, functional, and dynamic programming. Its main feature on top of these is support for optional static type declarations as part of the language. The source code gets translated into optimized C/C++ code and compiled as Python extension modules. This allows for both very fast program execution and tight integration with external C libraries, while keeping up the high programmer productivity for which the Python language is well known. [2]</li>
-<li>关于Cython在ipn中的使用，请参见：<a href="http://docs.cython.org/src/quickstart/build.html">http://docs.cython.org/src/quickstart/build.html</a></li>
+<h3 id="①-设定Whoosh的Schema">① 设定Whoosh的Schema<a class="anchor-link" href="#①-设定Whoosh的Schema">¶</a></h3><p>这个Schema指定了记录的标题、内容、标识符等信息的类型，由于我们的目标是文本检索，所以标题和内容都是TEXT，Schema还有很多别的设定，比如可以设定记录的关键字等等。
+变量ix是搜索的关键：索引。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">whoosh.index</span> <span class="kn">import</span> <span class="n">create_in</span>
+<span class="kn">from</span> <span class="nn">whoosh.fields</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">TEXT</span><span class="p">(</span><span class="n">stored</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span> <span class="n">path</span><span class="o">=</span><span class="n">ID</span><span class="p">(</span><span class="n">stored</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span> <span class="n">content</span><span class="o">=</span><span class="n">TEXT</span><span class="p">)</span>
+<span class="n">ix</span> <span class="o">=</span> <span class="n">create_in</span><span class="p">(</span><span class="s">"Exp0131_files"</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s">"index"</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="②-读入语料，建立索引">② 读入语料，建立索引<a class="anchor-link" href="#②-读入语料，建立索引">¶</a></h3><p>这是实现搜索的一个重要手段，即对每一条记录建立索引记录，为了示意方便，我们把每一条记录的内容都写到title中，内容content留空。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">idx</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">writer</span> <span class="o">=</span> <span class="n">ix</span><span class="o">.</span><span class="n">writer</span><span class="p">()</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"Exp0131_files"</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s">"textbase.txt"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fin</span><span class="p">:</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">add_document</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">line</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">),</span> <span class="n">path</span><span class="o">=</span><span class="s">u"Id: </span><span class="si">%d</span><span class="s">"</span> <span class="o">%</span> <span class="n">idx</span><span class="p">,</span><span class="n">content</span><span class="o">=</span><span class="s">u'N/A'</span><span class="p">)</span>
+        <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+<span class="n">writer</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">'</span><span class="si">%d</span><span class="s"> records loaded.'</span> <span class="o">%</span> <span class="n">idx</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>231189 records loaded.
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="③-检索测试">③ 检索测试<a class="anchor-link" href="#③-检索测试">¶</a></h3><p>索引建立完成之后，就可以进行检索测试，默认的Whoosh支持简单的AND OR用法，这里简单示意一个如下</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="o">%%</span><span class="k">time</span>
+from whoosh.qparser import QueryParser
+
+with ix.searcher() as searcher:
+    query = QueryParser("title", ix.schema).parse(u"新闻 AND 美国 OR 日本")
+    results = searcher.search(query)
+    if results:
+        for res in results:
+            print res['title']
+    else:
+        print 'Not found'
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>有 一个 现象 引起 了 我 的 注意 ，今年 来 采访 “ 两会 ” 的 外国 记者 中 ，前 7 位 的 国家 是 日本 、 美国 、 英国 、 德国 、 韩国 、 法国 、 加拿大 ，而 日本 、 美国 的 主要 新闻 媒体 派出 的 记者 近 200 人 ，占 采访 “ 两会 ” 外国 记者 总数 的 一半 ，说明 发达国家 对 中国 的 关注 程度 。
+
+当 记者 今晨 在 饭桌 上 与 美国 《 新闻 周刊 》 和 法国 《 费加罗 报 》 记者 交换 看法 时 ，新闻 已 成为 “ 旧闻 ” 。
+
+中国 和 美国 远 隔 重洋 ，两 国 人民 间 的 相互 了解 很多 要 通过 新闻 媒体 。
+
+我 知道 美国 人民 不 会 这么 做 的 ，怎么 能 把 战争 物资 卖 给 一个 侵略 国家 呢 ？‘ 是的 ，’ 他 肯定 地 说 ，‘ 消息 来源 ，就 是 你们 美国 的 新闻 电讯 。
+
+美国 《 新闻 周刊 》 甚至 用 “ 德国 病 ” 这样 的 概念 描述 德国 经济 现状 。
+
+他 在 会谈 后 举行 的 新闻 发布会 上 表示 ，美国 将 继续 支持 埃及 的 军事 现代化 计划 。
+
+奥尔布赖特 在 抵达 科威特 后 接受 美国 有线 新闻 广播 公司 记者 采访 时 说 ，美国 并 不 认为 ，美国 需要 联合国 安理会 通过 一 项 新 的 决议 之后 才 能 对 伊拉克 动武 。
+
+例如 ，日本 的 索尼 公司 在 80 年代 末 以后 大举 投资 新闻 媒体 和 娱乐业 ，在 1989年 买 下 美国 哥伦比亚 影片 和 法国 的 特莱玛 音乐 制作 公司 ，随后 同 美国 的 布洛克巴斯特 影视 公司 和 时代 — 沃纳 公司 合资 建立 了 几 个 广播 公司 ，还 与 一些 电视 、 电影 制作 公司 进行 了 合资 。
+
+我们 国家 也 有 犯罪 ，也 有 流浪 街头 的 孩子 ，却 没 人 过问 。 ”美国 新闻 代表团 团长 曾 这样 感慨 。
+
+最新 一 期 《 美国 新闻 和 世界 报道 》 周刊 援引 美国 众议院 的 报告 说 ，伊拉克 曾 于 1991年 夏 把 化学武器 和 400 枚 飞毛腿 导弹 转移 到 也门 和 苏丹 。
+
+Wall time: 179 ms
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="结语">结语<a class="anchor-link" href="#结语">¶</a></h2><p>很显然，本文仅仅是一个最简单的入门示例，这个过程中存在很多问题，例如：</p>
+<ul>
+<li>检索的过程中，并没有加入检索词的模糊性，目前的检索要求检索词必须精确匹配</li>
+<li>索引和检索的速度很慢，在上面的例子中，建立索引大概用了五分钟，单次检索的用时也在百毫秒级别（只有二十多万记录而已）</li>
 </ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="首先，为ipn设置ipython环境">首先，为ipn设置ipython环境<a class="anchor-link" href="#首先，为ipn设置ipython环境">¶</a></h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [190]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="o">%</span><span class="k">load_ext</span> cythonmagic
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="以下是我们的测试函数，这个函数来自参考文献[1]，用于计算地球表面两点之间的距离">以下是我们的测试函数，这个函数来自参考文献[1]，用于计算地球表面两点之间的距离<a class="anchor-link" href="#以下是我们的测试函数，这个函数来自参考文献[1]，用于计算地球表面两点之间的距离">¶</a></h4>
+<p>这些问题在实际中大概需要逐一解决，值得庆幸的是Whoose在设计时就把自己定位在一个框架，因此功能的扩展（估计）并不会很难。最后引用Whoose文档中的一段话，用来说明Whoose的定位：</p>
+<blockquote><p>Whoosh is a fast, pure Python search engine library.</p>
+<p>The primary design impetus of Whoosh is that it is pure Python. You should be able to use Whoosh anywhere you can use Python, no compiler or Java required.</p>
+<p>Like one of its ancestors, Lucene, Whoosh is not really a search engine, it’s a programmer library for creating a search engine [1].</p>
+<p>Practically no important behavior of Whoosh is hard-coded. Indexing of text, the level of information stored for each term in each field, parsing of search queries, the types of queries allowed, scoring algorithms, etc. are all customizable, replaceable, and extensible.</p>
+<p>[1]    It would of course be possible to build a turnkey search engine on top of Whoosh, like Nutch and Solr use Lucene.</p>
+</blockquote>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [169]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="kn">import</span> <span class="nn">math</span>
-
-<span class="k">def</span> <span class="nf">great_circle_1</span><span class="p">(</span><span class="n">lon1</span><span class="p">,</span><span class="n">lat1</span><span class="p">,</span><span class="n">lon2</span><span class="p">,</span><span class="n">lat2</span><span class="p">):</span>
-    <span class="n">radius</span> <span class="o">=</span> <span class="mi">3956</span> <span class="c">#miles</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mf">180.0</span>
-
-    <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="mf">90.0</span><span class="o">-</span><span class="n">lat1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="mf">90.0</span><span class="o">-</span><span class="n">lat2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">theta</span> <span class="o">=</span> <span class="p">(</span><span class="n">lon2</span><span class="o">-</span><span class="n">lon1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">((</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="o">+</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)))</span>
-
-    <span class="k">return</span> <span class="n">radius</span><span class="o">*</span><span class="n">c</span>
+<div class=" highlight hl-ipython2"><pre> 
 </pre></div>
 </div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [170]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="o">%%</span><span class="k">time</span>
-lon1, lat1, lon2, lat2 = -72.345, 34.323, -61.823, 54.826
-for i in xrange(500000):
-    great_circle_1(lon1,lat1,lon2,lat2)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Wall time: 1.16 s
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="经过测试，得到了运行时间的baseline。在这个函数的运行过程中，数学运算占据了很大比例，Cython使我们指定变量的类型为C语言的数据类型，这也是最基本的加速手段，改动后的程序如下：">经过测试，得到了运行时间的baseline。在这个函数的运行过程中，数学运算占据了很大比例，Cython使我们指定变量的类型为C语言的数据类型，这也是最基本的加速手段，改动后的程序如下：<a class="anchor-link" href="#经过测试，得到了运行时间的baseline。在这个函数的运行过程中，数学运算占据了很大比例，Cython使我们指定变量的类型为C语言的数据类型，这也是最基本的加速手段，改动后的程序如下：">¶</a></h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [183]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="o">%%</span><span class="n">cython</span>
-<span class="k">import</span> <span class="nn">math</span>
-
-<span class="k">def</span> <span class="nf">great_circle_2</span><span class="p">(</span><span class="nb">float</span> <span class="n">lon1</span><span class="p">,</span><span class="nb">float</span> <span class="n">lat1</span><span class="p">,</span><span class="nb">float</span> <span class="n">lon2</span><span class="p">,</span><span class="nb">float</span> <span class="n">lat2</span><span class="p">):</span>
-    <span class="k">cdef</span> <span class="kt">float</span> <span class="nf">radius</span> <span class="o">=</span> <span class="mf">3956.0</span>
-    <span class="k">cdef</span> <span class="kt">float</span> <span class="nf">pi</span> <span class="o">=</span> <span class="mf">3.14159265</span>
-    <span class="k">cdef</span> <span class="kt">float</span> <span class="nf">x</span> <span class="o">=</span> <span class="n">pi</span><span class="o">/</span><span class="mf">180.0</span>
-    <span class="k">cdef</span> <span class="kt">float</span> <span class="nf">a</span><span class="p">,</span><span class="nf">b</span><span class="p">,</span><span class="nf">theta</span><span class="p">,</span><span class="nf">c</span>
-
-    <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="mf">90.0</span><span class="o">-</span><span class="n">lat1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="mf">90.0</span><span class="o">-</span><span class="n">lat2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">theta</span> <span class="o">=</span> <span class="p">(</span><span class="n">lon2</span><span class="o">-</span><span class="n">lon1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">((</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)))</span>
-    <span class="k">return</span> <span class="n">radius</span><span class="o">*</span><span class="n">c</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [184]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="o">%%</span><span class="k">time</span>
-lon1, lat1, lon2, lat2 = -72.345, 34.323, -61.823, 54.826
-for i in xrange(500000):
-    great_circle_2(lon1,lat1,lon2,lat2)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Wall time: 1.02 s
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="可以看到，速度得到了一定程度的提升，这基本上可以说是最为无脑的“优化”方法。在此基础上，如果我们继续分析可以发现，性能瓶颈可能存在于Python的Math模块，Cython允许我们引入C语言的函数库，这时Cython加速的重要途径，改动后的程序如下（顺便可以把函数的定义也改成C风格的）：">可以看到，速度得到了一定程度的提升，这基本上可以说是最为无脑的“优化”方法。在此基础上，如果我们继续分析可以发现，性能瓶颈可能存在于Python的Math模块，Cython允许我们引入C语言的函数库，这时Cython加速的重要途径，改动后的程序如下（顺便可以把函数的定义也改成C风格的）：<a class="anchor-link" href="#可以看到，速度得到了一定程度的提升，这基本上可以说是最为无脑的“优化”方法。在此基础上，如果我们继续分析可以发现，性能瓶颈可能存在于Python的Math模块，Cython允许我们引入C语言的函数库，这时Cython加速的重要途径，改动后的程序如下（顺便可以把函数的定义也改成C风格的）：">¶</a></h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [187]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="o">%%</span><span class="n">cython</span>
-<span class="k">cdef</span> <span class="kr">extern</span> <span class="k">from</span> <span class="s">"math.h"</span><span class="p">:</span>
-    <span class="nb">float</span> <span class="n">cosf</span><span class="p">(</span><span class="nb">float</span> <span class="n">theta</span><span class="p">)</span>
-    <span class="nb">float</span> <span class="n">sinf</span><span class="p">(</span><span class="nb">float</span> <span class="n">theta</span><span class="p">)</span>
-    <span class="nb">float</span> <span class="n">acosf</span><span class="p">(</span><span class="nb">float</span> <span class="n">theta</span><span class="p">)</span>
-
-<span class="k">cdef</span> <span class="nf">great_circle_3</span><span class="p">(</span><span class="nb">float</span> <span class="n">lon1</span><span class="p">,</span><span class="nb">float</span> <span class="n">lat1</span><span class="p">,</span><span class="nb">float</span> <span class="n">lon2</span><span class="p">,</span><span class="nb">float</span> <span class="n">lat2</span><span class="p">):</span>
-    <span class="k">cdef</span> <span class="kt">float</span> <span class="nf">radius</span> <span class="o">=</span> <span class="mf">3956.0</span>
-    <span class="k">cdef</span> <span class="kt">float</span> <span class="nf">pi</span> <span class="o">=</span> <span class="mf">3.14159265</span>
-    <span class="k">cdef</span> <span class="kt">float</span> <span class="nf">x</span> <span class="o">=</span> <span class="n">pi</span><span class="o">/</span><span class="mf">180.0</span>
-    <span class="k">cdef</span> <span class="kt">float</span> <span class="nf">a</span><span class="p">,</span><span class="nf">b</span><span class="p">,</span><span class="nf">theta</span><span class="p">,</span><span class="nf">c</span>
-
-    <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="mf">90.0</span><span class="o">-</span><span class="n">lat1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="mf">90.0</span><span class="o">-</span><span class="n">lat2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">theta</span> <span class="o">=</span> <span class="p">(</span><span class="n">lon2</span><span class="o">-</span><span class="n">lon1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">acosf</span><span class="p">((</span><span class="n">cosf</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">cosf</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="n">sinf</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">sinf</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">cosf</span><span class="p">(</span><span class="n">theta</span><span class="p">)))</span>
-
-    <span class="k">return</span> <span class="n">radius</span><span class="o">*</span><span class="n">c</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [188]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="o">%%</span><span class="k">time</span>
-lon1, lat1, lon2, lat2 = -72.345, 34.323, -61.823, 54.826
-for i in xrange(500000):
-    great_circle_3(lon1,lat1,lon2,lat2)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Wall time: 272 ms
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="经过测试，速度有了非常明显的提升。其实，这段程序依然有优化的空间，其中之一是使用C语言的循环代替Python的for循环，因为使用一个Python的for循环执行一个C风格的函数，会存在一些转换开销，不过，这里就不做演示咯（懒！）">经过测试，速度有了非常明显的提升。其实，这段程序依然有优化的空间，其中之一是使用C语言的循环代替Python的for循环，因为使用一个Python的for循环执行一个C风格的函数，会存在一些转换开销，不过，这里就不做演示咯（懒！）<a class="anchor-link" href="#经过测试，速度有了非常明显的提升。其实，这段程序依然有优化的空间，其中之一是使用C语言的循环代替Python的for循环，因为使用一个Python的for循环执行一个C风格的函数，会存在一些转换开销，不过，这里就不做演示咯（懒！）">¶</a></h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Reference:">Reference:<a class="anchor-link" href="#Reference:">¶</a></h2><p>[1] <a href="http://blog.perrygeo.net/2008/04/19/a-quick-cython-introduction/">http://blog.perrygeo.net/2008/04/19/a-quick-cython-introduction/</a></p>
-<p>[2] <a href="http://docs.cython.org/src/quickstart/overview.html">http://docs.cython.org/src/quickstart/overview.html</a></p>
 </div>
 </div>
 </div>
@@ -512,13 +443,16 @@ for i in xrange(500000):
         <section>
         <div class="span2" style="float:right;font-size:0.9em;">
             <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2015-04-14T12:36:55+02:00">四月 14, 2015</time>
+            <time pubdate="pubdate" datetime="2015-04-15T11:02:00+02:00">四月 15, 2015</time>
             <h4>Category</h4>
             <a class="category-link" href="/categories.html#python-ref">Python</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="/tags.html#python-ref">Python
                     <span>2</span>
+</a></li>
+                <li><a href="/tags.html#whoosh-ref">Whoosh
+                    <span>1</span>
 </a></li>
             </ul>
 <h4>Contact</h4>
