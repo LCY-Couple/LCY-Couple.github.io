@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<body background="images/background.png">
+    <head>
+        <meta charset="utf-8"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="LCY.Hugepanda" />
+        <meta name="copyright" content="LCY.Hugepanda" />
+		
+<head>
+    <style>
+        .bannerbox {
+            width:100%;
+            position:relative;
+            overflow:hidden;
+            height:140px;
+        }
+        .banner {
+            width:1500px;
+            position:absolute;
+            left:50%;
+            margin-left:-800px;
+        }
+    </style>
+</head>
+<body>
+    <div class="bannerbox">
+        <div class="banner">
+            <img src="images\\LCYbanner.png">
+        </div>
+    </div> 
+</body>
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="Python, Python, " />
+
+<meta property="og:title" content="Python抓取Baidu搜索结果 "/>
+<meta property="og:url" content="/pythonzhua-qu-baidusou-suo-jie-guo.html" />
+<meta property="og:description" content="Python抓取Baidu搜索结果¶本文简要介绍如何利用Python实现简单的网页内容抓取。 本文暂不涉及太复杂的内容，仅仅是最简单的示例。但是需要说明以下几点，以免概念层面出现误解： 根据目标网页实现手段的不同，爬虫抓取的难度也是有所区别的。最简单的是直观的html网页，复杂一些的有js或者动态加载的，需要根据情况选用不同的技术解决。解决问题的关键在于“降低爬虫开发难度和性能消耗”和“模仿真实用户行为”之间的均衡。 爬虫的一个难点在于如何“与服务器和谐相处”。对于服务器而言，爬虫会对性能造成一定影响，情况严重时甚至造成实质上的攻击。而对于爬虫而言，重要的追求就是抓取效率。因此，服务器和爬虫如同天生冤家，如何控制住场面不要失控，需要细致的设计和调整。 本文内容基于Python 2.7 抓取的几个要素¶在具体开始写程序之前，我们需要搞清楚一下几个问题： Baidu的搜索URL如何写 Baidu搜索返回的结果页面中，我们感兴趣的内容在哪里 第一个问题比较简单，随便搜索一下就可以得到结果。 第二个问题，我们查看搜索“Python”之后返回的结果页面源代码，利用全文搜索找到其中典型的结果(ipn转换成html的时候会直接按照html标签渲染，所以就不显示了……)。可以看到，结果的标题部分位于 h3 class=&#34;t ..." />
+<meta property="og:site_name" content="LCY Data Science Couple" />
+<meta property="og:article:author" content="LCY.Hugepanda" />
+<meta property="og:article:published_time" content="2015-04-16T11:30:00+08:00" />
+<meta name="twitter:title" content="Python抓取Baidu搜索结果 ">
+<meta name="twitter:description" content="Python抓取Baidu搜索结果¶本文简要介绍如何利用Python实现简单的网页内容抓取。 本文暂不涉及太复杂的内容，仅仅是最简单的示例。但是需要说明以下几点，以免概念层面出现误解： 根据目标网页实现手段的不同，爬虫抓取的难度也是有所区别的。最简单的是直观的html网页，复杂一些的有js或者动态加载的，需要根据情况选用不同的技术解决。解决问题的关键在于“降低爬虫开发难度和性能消耗”和“模仿真实用户行为”之间的均衡。 爬虫的一个难点在于如何“与服务器和谐相处”。对于服务器而言，爬虫会对性能造成一定影响，情况严重时甚至造成实质上的攻击。而对于爬虫而言，重要的追求就是抓取效率。因此，服务器和爬虫如同天生冤家，如何控制住场面不要失控，需要细致的设计和调整。 本文内容基于Python 2.7 抓取的几个要素¶在具体开始写程序之前，我们需要搞清楚一下几个问题： Baidu的搜索URL如何写 Baidu搜索返回的结果页面中，我们感兴趣的内容在哪里 第一个问题比较简单，随便搜索一下就可以得到结果。 第二个问题，我们查看搜索“Python”之后返回的结果页面源代码，利用全文搜索找到其中典型的结果(ipn转换成html的时候会直接按照html标签渲染，所以就不显示了……)。可以看到，结果的标题部分位于 h3 class=&#34;t ...">
+<meta property="og:image" content="images/150416-feature.png" />
+<meta name="twitter:image" content="images/150416-feature.png" >
+
+        <title>Python抓取Baidu搜索结果  · LCY Data Science Couple
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/theme/css/custom.css" media="screen">
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="/"><span class=site-name>LCY Data Science Couple</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="">Home</a></li>
+                            <li ><a href="/categories.html">Categories</a></li>
+                            <li ><a href="/tags.html">Tags</a></li>
+                            <li ><a href="/archives.html">Archives</a></li>
+							<li ><a href="/skill.html">Skill Tree</a></li>
+                            <li><form class="navbar-search" action="/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="/pythonzhua-qu-baidusou-suo-jie-guo.html"> Python抓取Baidu搜索结果  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            
+            
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Python抓取Baidu搜索结果">Python&#25235;&#21462;Baidu&#25628;&#32034;&#32467;&#26524;<a class="anchor-link" href="#Python抓取Baidu搜索结果">&#182;</a></h2><p>本文简要介绍如何利用Python实现简单的网页内容抓取。</p>
+<p>本文暂不涉及太复杂的内容，仅仅是最简单的示例。但是需要说明以下几点，以免概念层面出现误解：</p>
+<ul>
+<li>根据目标网页实现手段的不同，爬虫抓取的难度也是有所区别的。最简单的是直观的html网页，复杂一些的有js或者动态加载的，需要根据情况选用不同的技术解决。解决问题的关键在于“降低爬虫开发难度和性能消耗”和“模仿真实用户行为”之间的均衡。</li>
+<li>爬虫的一个难点在于如何“与服务器和谐相处”。对于服务器而言，爬虫会对性能造成一定影响，情况严重时甚至造成实质上的攻击。而对于爬虫而言，重要的追求就是抓取效率。因此，服务器和爬虫如同天生冤家，如何控制住场面不要失控，需要细致的设计和调整。</li>
+</ul>
+<p>本文内容基于Python 2.7</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="抓取的几个要素">&#25235;&#21462;&#30340;&#20960;&#20010;&#35201;&#32032;<a class="anchor-link" href="#抓取的几个要素">&#182;</a></h3><p>在具体开始写程序之前，我们需要搞清楚一下几个问题：</p>
+<ol>
+<li>Baidu的搜索URL如何写</li>
+<li>Baidu搜索返回的结果页面中，我们感兴趣的内容在哪里</li>
+</ol>
+<p>第一个问题比较简单，随便搜索一下就可以得到结果。
+第二个问题，我们查看搜索“Python”之后返回的结果页面源代码，利用全文搜索找到其中典型的结果(ipn转换成html的时候会直接按照html标签渲染，所以就不显示了……)。可以看到，结果的标题部分位于 h3 class="t"&gt; &lt; a..... &gt;  里面，摘要部分位于 div class="c-abstract"&gt;... &lt; /div&gt; 里面，这是后面进行html解析的依据</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="最简单的抓取">&#26368;&#31616;&#21333;&#30340;&#25235;&#21462;<a class="anchor-link" href="#最简单的抓取">&#182;</a></h3><p>回答了上面的两个问题，我们就可以开始撰写代码。这里用到了BeautifulSoup这个HTML/XML解析库，毕竟这种任务用正则表达式还是有点累。
+代码部分并没有任何难点，生成查询URL后利用urllib打开，返回的结果使用BeautifulSoup解析即可。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[86]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c"># coding=utf8</span>
+<span class="kn">import</span> <span class="nn">urllib2</span>
+
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="k">import</span> <span class="n">BeautifulSoup</span> <span class="k">as</span> <span class="n">BS</span>
+
+<span class="k">def</span> <span class="nf">search_baidu</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="n">search_url</span><span class="o">=</span><span class="s">&#39;http://www.baidu.com/s?wd=key&#39;</span> 
+    <span class="n">req</span><span class="o">=</span><span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">search_url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;key&#39;</span><span class="p">,</span><span class="n">key</span><span class="p">))</span> 
+
+    <span class="n">soup</span><span class="o">=</span><span class="n">BS</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+    <span class="n">title</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="n">soup_title</span> <span class="o">=</span> <span class="n">soup</span><span class="p">(</span><span class="s">&#39;h3&#39;</span><span class="p">,</span><span class="s">&#39;t&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">soup_title</span><span class="p">:</span>
+        <span class="n">title</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+        <span class="nb">print</span> <span class="s">&#39;TITLE: &#39;</span> <span class="o">+</span> <span class="n">line</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="nb">print</span> <span class="s">&#39;ABSTRACT: &#39;</span><span class="o">+</span> <span class="n">line</span><span class="o">.</span><span class="n">find_next</span><span class="p">(</span><span class="s">&quot;div&quot;</span><span class="p">,</span><span class="s">&#39;c-abstract&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>   
+        
+<span class="k">if</span> <span class="n">__name__</span><span class="o">==</span><span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">search_baidu</span><span class="p">(</span><span class="s">&#39;Python&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>TITLE: Welcome to Python.org
+ABSTRACT: The official home of the Python Programming Language... # Python 3: Simple output (with Unicode) &gt;&gt;&gt; print(&quot;Hello, I&apos;m Python!&quot;) Hello, I&apos;m Python...
+
+TITLE: Python_百度百科
+ABSTRACT: 研究互联网产品和技术,提供原创中文精品教程... 比如,完成同一个任务,C语言要写1000行代码,Java只需要写100行,而Python可能只要20行。 所以Python是一种相当高级的...
+
+TITLE: Python教程 - 廖雪峰的官方网站
+ABSTRACT: 研究互联网产品和技术,提供原创中文精品教程... 比如,完成同一个任务,C语言要写1000行代码,Java只需要写100行,而Python可能只要20行。 所以Python是一种相当高级的...
+
+TITLE: Python入门教程 超详细1小时学会Python_python_脚本之家
+ABSTRACT: 本文适合有经验的程序员尽快进入Python世界.特别地,如果你掌握Java和Javascript,不用1小时你就可以用Python快速流畅地写有用的Python程序.
+
+TITLE: Python快速教程 - Vamei - 博客园
+ABSTRACT: Python包含的内容很多,加上各种标准库、拓展库,乱花渐欲迷人眼。我一直希望写一个快速的、容易上手的Python教程,而且言语简洁,循序渐进,让没有背景的读者也可以从...
+
+TITLE: python吧_百度贴吧
+ABSTRACT: 03月24日漏签0天  python吧 关注:24,019贴子:143,357 目录: 程序设计  收起/展开指引  看贴  图片  精品  视频  游戏  群组  吧内搜索...
+
+TITLE: 简明Python 教程
+ABSTRACT: 无论您刚接触电脑还是一个有经验的程序员,本书都将有助您学习使用Python语言。目录表前言 本书的读者 本书的由来 本书目前的状况 官方网站 约定条款 欢迎给我...
+
+TITLE: Python编程小组
+ABSTRACT: Python是豆瓣的主要开发语言。欢迎在这儿讨论豆瓣对python语言的使用、python的web应用、或者有关python的书、Monty Python电影。  一般的python语言话题可以在中文pytho...
+
+TITLE: Python基础教程 (第2版) 中文高清PDF版 - Python - 大家论坛
+ABSTRACT: Beginning Python: From Novice to Professional, 2nd Edition 本书包括Python程序设计的方方面面,首先从Python的安装开始,随后介绍了Python的基础知识和基本...
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="结语">&#32467;&#35821;<a class="anchor-link" href="#结语">&#182;</a></h3><p>可以看到，基本的抓取已经完成了，但是，这里面有几个问题是我们没有解决的：</p>
+<ol>
+<li>仔细看百度百科的那条摘要，会发现摘要的提取是错误的，这是因为百度百科的摘要部分用了不一样的html结构（同类的还包括其他一些嵌入百度搜索结果的一些特殊结果，比如软件下载等等）。因此，如果希望有比较好的抓取结果，需要不断扩充抓取逻辑，适应各种不同的情况。</li>
+<li>这里并没有做任何防屏蔽的处理，如果简单在外面套一个循环的话，必然会被百度屏蔽IP。</li>
+</ol>
+<p>那么，如果解决这些问题，这里简单提几个解决方案：</p>
+<ol>
+<li>采用开源抓取框架，例如Scrapy，这种框架比较方便添加一些后续的功能，比如抓取间隔等。</li>
+<li>为了防止屏蔽，最基本的就是增加抓取间隔，避免单位时间内过多的请求，另外伪装user-agent、抓代理IP之类的方法也是可以尝试的。</li>
+</ol>
+
+</div>
+</div>
+</div>
+    </div>
+  </div>
+
+            
+            
+            <hr/>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2015-04-16T11:30:00+08:00">四月 16, 2015</time>
+            <h4>Category</h4>
+            <a class="category-link" href="/categories.html#python-ref">Python</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="/tags.html#python-ref">Python
+                    <span>3</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+    <a href="#" title="My You can add links in your config file Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-you can add links in your config file sidebar-social-links"></i></a>
+    <a href="#" title="My Another social link Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-another social link sidebar-social-links"></i></a>
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</body>
+</html>
