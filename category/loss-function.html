@@ -1,159 +1,235 @@
-<!DOCTYPE html>
-<html lang="en-US">
-<body background="images/background.png">
+<!doctype html>
+<html class="no-js" lang="en">
     <head>
-        <meta charset="utf-8"> 
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="author" content="LCY" />
-        <meta name="copyright" content="LCY" />
-		
-<head>
-    <style>
-        .bannerbox {
-            width:100%;
-            position:relative;
-            overflow:hidden;
-            height:140px;
-        }
-        .banner {
-            width:1500px;
-            position:absolute;
-            left:50%;
-            margin-left:-800px;
-        }
-    </style>
-</head>
-<body>
-    <div class="bannerbox">
-        <div class="banner">
-            <img src="images\\LCYbanner.png">
-        </div>
-    </div> 
-</body>
-        <meta property="og:type" content="article" />
-        <meta name="twitter:card" content="summary">
+        <link rel="shortcut icon" href="" />
 
-<meta property="og:title" content="LCY Data Science Couple"/>
-<meta name="twitter:title" content="LCY Data Science Couple">
-<meta property="og:url" content="" />
-<meta property="og:site_name" content="LCY Data Science Couple" />
-<meta property="og:article:author" content="LCY" />
-        <title>LCY Data Science Couple
-</title>
-        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="/theme/css/pygments.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="/theme/tipuesearch/tipuesearch.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="/theme/css/elegant.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="/theme/css/custom.css" media="screen">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="LCY" />
+        <title>Loss function</title>
+        
+        <meta name="description" content="Welcome :-)" />
+        <meta name="keywords" content="Blog "/>
+
+        <!--[if !IE 7]>
+        <style type="text/css">
+            #main-content {display:table;height:100%}
+        </style>
+        <![endif]-->
+        <link rel="stylesheet" href="/theme/css/backdrop.css" />
+        <link rel="stylesheet" href="/theme/css/pygments.css" />
+        <script src="/theme/js/modernizr.js"></script>
+
+
+        <script type="text/javascript">
+            var disqus_shortname = 'lcycouple'; 
+
+            (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.type = 'text/javascript';
+                s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+            }());
+        </script>
     </head>
+      
+
     <body>
-        <div id="content-sans-footer">
-        <div class="navbar navbar-static-top">
-            <div class="navbar-inner">
-                <div class="container-fluid">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <a class="brand" href="/"><span class=site-name>LCY Data Science Couple</span></a>
-                    <div class="nav-collapse collapse">
-                        <ul class="nav pull-right top-menu">
-                            <li ><a href="">Home</a></li>
-                            <li ><a href="/categories.html">Categories</a></li>
-                            <li ><a href="/tags.html">Tags</a></li>
-                            <li ><a href="/archives.html">Archives</a></li>
-							<li ><a href="/skill.html">Skill Tree</a></li>
-                            <li><form class="navbar-search" action="/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+        <div class="master-row">
+
+            <div class="content-pane main-content">
+                <nav class="top-bar" data-topbar role="navigation">
+                    <ul class="title-area">
+                        <li class="name"><!-- Leave this empty --></li>
+                        <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+                    </ul>
+                    <section class="top-bar-section">
+                        <ul class="left">
                         </ul>
+                        <ul class="right">
+                            <li class="active"><a href="/category/loss-function.html">Loss function</a></li>
+                            <li><a href="/category/machine-learning.html">Machine Learning</a></li>
+                            <li><a href="/category/mloss.html">MLOSS</a></li>
+                            <li><a href="/category/neural-network.html">Neural Network</a></li>
+                            <li><a href="/category/python.html">Python</a></li>
+                            <li><a href="/category/tool.html">Tool</a></li>
+                        </ul>
+                    </section>
+                </nav>
+
+                <div class="row title-bar">
+                    <div class="small-12 columns">
+                        <h1><a href="">LCY Data Science Couple</a></h1><h2> <small>Welcome :-)</small></h2>
+                        <hr>
                     </div>
                 </div>
-            </div>
+            
+                <div id="contents">
+<div class="row">
+    <div class="small-12 columns">
+        <h2>Articles in category &ldquo;Loss function&rdquo;</h2>
+          <section class="summary">
+    <h3><a href="/kai-shi-suan-fa-bi-jin-wu-chai-fen-xi-zhi-qian-de-yi-dian-er-re-shen-huo-dong.html" rel="bookmark" title="Permalink to 开始算法逼近误差分析之前的一点儿热身活动">开始算法逼近误差分析之前的一点儿热身活动</a></h3>
+    <div class="row info-bar" style="margin-left:0rem;margin-bottom:6px;">
+    <div class="small-12 columns">
+        <ul class="inline-list">
+            <li><span><i class="fa fa-calendar"></i>&nbsp; 周四 09 一月 2014</span></li>
+            <li><span><i class="fa fa-folder-open"></i>&nbsp; <a href="/category/loss-function.html">Loss function</a></span></li>
+            <li><span><i class="fa fa-comments"></i>&nbsp; <a href="/kai-shi-suan-fa-bi-jin-wu-chai-fen-xi-zhi-qian-de-yi-dian-er-re-shen-huo-dong.html#disqus_thread" rel="bookmark" title="Disqus Comments">开始算法逼近误差分析之前的一点儿热身活动</a></span></li>
+            <li>
+                <span>
+                    <i class="fa fa-tags"></i>&nbsp;
+                    <a href="/tag/machine-learning.html"><span class="label">Machine learning</span></a>
+                    <a href="/tag/loss-function.html"><span class="label">Loss function</span></a>
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>
+    <div class="row summary">
+        <div class="small-12 medium-7 columns">
+            Short version for index and feeds
+            <p class='text-right'><a href="/kai-shi-suan-fa-bi-jin-wu-chai-fen-xi-zhi-qian-de-yi-dian-er-re-shen-huo-dong.html">Continue reading&hellip;</a></p>
         </div>
-        <div class="container-fluid">
-            <div class="row-fluid">
-                <div class="span1"></div>
-                <div class="span10">
-<div class="row-fluid">
-
-    <div class="row-fluid">
-        <div class="span8">
-            <header>
-            <h1 id="about-me">About us</h1>
-            </header>
-            <div class="article-content">
-                Welcome to our tiny site :-) 
- 我们是
-            </div>
-        </div>
-
-        <div class="span4">
-            <header>
-            <h1 id="my-projects">Our Projects</h1>
-            </header>
-            <ul class="list-all-articles">
-                <li>
-                <a href="https://github.com/lcy-hugepanda/ROC4ML" title="ROC4ML">ROC4ML</a> <span class="proj-desc">A simple ROC (Receiver Operating Characteristic) analysis and visualization tool for machine learning algorithms.</span>
-                </li>
-            </ul>
-            <ul class="list-all-articles">
-                <li>
-                <a href="https://github.com/lcy-hugepanda/MLAlgoTester" title="MLAlgoTester">MLAlgoTester</a> <span class="proj-desc">An automatic evaluating framework for machine learning algorithms</span>
-                </li>
-            </ul>
-            <ul class="list-all-articles">
-                <li>
-                <a href="https://github.com/lcy-hugepanda/LCY-ML-Demos" title="LCY-ML-Demos">LCY-ML-Demos</a> <span class="proj-desc">Some interesting (and useful :) ) demos of machine learning algorithms</span>
-                </li>
-            </ul>
+        <div class="small-12 medium-5 columns">
+            <a class="th" href="/kai-shi-suan-fa-bi-jin-wu-chai-fen-xi-zhi-qian-de-yi-dian-er-re-shen-huo-dong.html">
+                <img src="images/140109-feature.png">
+            </a>
         </div>
     </div>
+</section>
 
-    <div class="row-fluid">
-        <div class="span12">
-            <header>
-            <h1 id="recent-posts">Recent Posts <a id="allposts" href="/archives.html">all posts</a></h1>
-            </header>
-        <div class="recent-posts">
-            <article>				
-				<img src="images/140109-feature.png">				
-                <a href="/kai-shi-suan-fa-bi-jin-wu-chai-fen-xi-zhi-qian-de-yi-dian-er-re-shen-huo-dong.html">开始算法逼近误差分析之前的一点儿热身活动  </a>
-                <section>
-                    LCY.Sesoposted in
-                <a href="/categories.html#loss-function-ref">Loss function</a>
-                <div class="recent-posts-time">
-                <time pubdate="pubdate" datetime="2014-01-09T10:28:00+08:00">周四 09 一月 2014</time>
-                </div>
-                </section>
-            </article>
-        </div>
-        </div>
+
     </div>
 </div>
                 </div>
-                <div class="span1"></div>
+
+                <footer class="show-for-large-up">
+<div class="row">
+    <div class="small-6 medium-3 columns">
+        <ul class="left-nav">
+            <li><a href="">Home &nbsp;<i class="fa fa-home fa-fw"></i></a></li>
+            <li><a href="/categories.html">Categories &nbsp;<i class="fa fa-folder-open fa-fw"></i></a></li>
+        </ul>
+    </div>
+    <div class="small-6 medium-3 medium-push-6 columns">
+        <ul class="right-nav">
+            <li><a href="/archives.html"><i class="fa fa-archive fa-fw"></i>&nbsp; Archives</a></li>
+        </ul>
+    </div>
+    <div class="small-12 medium-6 medium-pull-3 columns text-center">
+        <p class="tag-cloud">
+            <a href="/tags.html"><i class="fa fa-tags"></i>&nbsp;Tags:</a>&nbsp;&nbsp;
+            <a href="/tag/boosting.html"><span class="label">Boosting</span></a>
+            <a href="/tag/mendeley.html"><span class="label">Mendeley</span></a>
+            <a href="/tag/whoosh.html"><span class="label">Whoosh</span></a>
+            <a href="/tag/mloss.html"><span class="label">MLOSS</span></a>
+            <a href="/tag/onenote.html"><span class="label">OneNote</span></a>
+            <a href="/tag/cnn.html"><span class="label">CNN</span></a>
+            <a href="/tag/neural-network.html"><span class="label">Neural Network</span></a>
+            <a href="/tag/wiz.html"><span class="label">Wiz</span></a>
+            <a href="/tag/machine-learning.html"><span class="label">Machine learning</span></a>
+            <a href="/tag/cython.html"><span class="label">Cython</span></a>
+            <a href="/tag/deep-learning.html"><span class="label">Deep learning</span></a>
+            <a href="/tag/python.html"><span class="label">Python</span></a>
+            <a href="/tag/coursera.html"><span class="label">Coursera</span></a>
+            <a href="/tag/noteexpress.html"><span class="label">NoteExpress</span></a>
+            <a href="/tag/loss-function.html"><span class="label">Loss function</span></a>
+            &nbsp;&hellip;
+        </p>
+    </div>
+    <div class="small-12 columns sub-footer">
+        <hr>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-left">
+                &copy;  LCY 
+                <!-- <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="cc.png" /></a>-->
+            </p>
+        </div>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-right">
+                Proudly powered by <a href="http://blog.getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="https://www.python.org/">Python</a>.
+            </p>
+        </div>
+    </div>
+</div>                </footer>
+            </div>
+            
+            <div class="image-pane main-content" style="background: url('images/background.jpg'); background-size:cover; background-position: right;">
+                <div class="row">
+                    <div class="small-12 medium-4 large-12 columns">
+                    </div>
+
+                    <div class="small-12 medium-4  large-12 columns link-list">
+                    </div>
+
+<!--
+                    <div class="small-12 medium-3 large-12 columns">
+                    </div>
+-->
+               </div>
             </div>
         </div>
-        <div id="push"></div>
+        
+        
+        <div class="row">
+            <footer class="hide-for-large-up">
+<div class="row">
+    <div class="small-6 medium-3 columns">
+        <ul class="left-nav">
+            <li><a href="">Home &nbsp;<i class="fa fa-home fa-fw"></i></a></li>
+            <li><a href="/categories.html">Categories &nbsp;<i class="fa fa-folder-open fa-fw"></i></a></li>
+        </ul>
     </div>
-<footer>
-<div id="footer">
-    <ul class="footer-content">
-        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
-    </ul>
-</div>
-</footer>        <script src="http://code.jquery.com/jquery.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-        <script>
-            function validateForm(query)
-            {
-                return (query.length > 0);
-            }
-        </script>
+    <div class="small-6 medium-3 medium-push-6 columns">
+        <ul class="right-nav">
+            <li><a href="/archives.html"><i class="fa fa-archive fa-fw"></i>&nbsp; Archives</a></li>
+        </ul>
+    </div>
+    <div class="small-12 medium-6 medium-pull-3 columns text-center">
+        <p class="tag-cloud">
+            <a href="/tags.html"><i class="fa fa-tags"></i>&nbsp;Tags:</a>&nbsp;&nbsp;
+            <a href="/tag/boosting.html"><span class="label">Boosting</span></a>
+            <a href="/tag/mendeley.html"><span class="label">Mendeley</span></a>
+            <a href="/tag/whoosh.html"><span class="label">Whoosh</span></a>
+            <a href="/tag/mloss.html"><span class="label">MLOSS</span></a>
+            <a href="/tag/onenote.html"><span class="label">OneNote</span></a>
+            <a href="/tag/cnn.html"><span class="label">CNN</span></a>
+            <a href="/tag/neural-network.html"><span class="label">Neural Network</span></a>
+            <a href="/tag/wiz.html"><span class="label">Wiz</span></a>
+            <a href="/tag/machine-learning.html"><span class="label">Machine learning</span></a>
+            <a href="/tag/cython.html"><span class="label">Cython</span></a>
+            <a href="/tag/deep-learning.html"><span class="label">Deep learning</span></a>
+            <a href="/tag/python.html"><span class="label">Python</span></a>
+            <a href="/tag/coursera.html"><span class="label">Coursera</span></a>
+            <a href="/tag/noteexpress.html"><span class="label">NoteExpress</span></a>
+            <a href="/tag/loss-function.html"><span class="label">Loss function</span></a>
+            &nbsp;&hellip;
+        </p>
+    </div>
+    <div class="small-12 columns sub-footer">
+        <hr>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-left">
+                &copy;  LCY 
+                <!-- <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="cc.png" /></a>-->
+            </p>
+        </div>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-right">
+                Proudly powered by <a href="http://blog.getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="https://www.python.org/">Python</a>.
+            </p>
+        </div>
+    </div>
+</div>            </footer>
+        </div>
+        
+        
+        <script src="/theme/js/jquery.min.js"></script>
+        <script src="/theme/js/foundation.min.js"></script>
+        <script src="/theme/js/app.js"></script>
     </body>
-    <!-- Theme: Elegant built for Pelican
-    License : http://oncrashreboot.com/pelican-elegant -->
-</body>
+  
 </html>

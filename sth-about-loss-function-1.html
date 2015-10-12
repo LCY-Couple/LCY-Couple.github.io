@@ -1,106 +1,81 @@
-<!DOCTYPE html>
-<html lang="en-US">
-<body background="images/background.png">
+<!doctype html>
+<html class="no-js" lang="en">
     <head>
-        <meta charset="utf-8"> 
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="author" content="LCY.Seso" />
-        <meta name="copyright" content="LCY.Seso" />
-		
-<head>
-    <style>
-        .bannerbox {
-            width:100%;
-            position:relative;
-            overflow:hidden;
-            height:140px;
-        }
-        .banner {
-            width:1500px;
-            position:absolute;
-            left:50%;
-            margin-left:-800px;
-        }
-    </style>
-</head>
-<body>
-    <div class="bannerbox">
-        <div class="banner">
-            <img src="images\\LCYbanner.png">
-        </div>
-    </div> 
-</body>
-        <meta property="og:type" content="article" />
-        <meta name="twitter:card" content="summary">
+        <link rel="shortcut icon" href="" />
 
-<meta name="keywords" content="Boosting, Loss function, Machine Learning, " />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="LCY" />
+        <title>Something about Loss Functions: 正篇（一）</title>
+        
+<meta name="description" content="&lt;p class=&#34;first last&#34;&gt;Short version for index and feeds&lt;/p&gt;
+" />
+<meta name="keywords" content=" Boosting Loss function  "/>
 
-<meta property="og:title" content="Something about Loss Functions: 正篇（一）  - 从学习问题的形式化描述开始 "/>
-<meta property="og:url" content="/sth-about-loss-function-1.html" />
-<meta property="og:description" content="Short version for index and feeds" />
-<meta property="og:site_name" content="LCY Data Science Couple" />
-<meta property="og:article:author" content="LCY.Seso" />
-<meta property="og:article:published_time" content="2010-10-03T10:20:00+08:00" />
-<meta property="" content="2010-10-04T18:40:00+08:00" />
-<meta name="twitter:title" content="Something about Loss Functions: 正篇（一）  - 从学习问题的形式化描述开始 ">
-<meta name="twitter:description" content="Short version for index and feeds">
-<meta property="og:image" content="/images/my-super-image.png" />
-<meta name="twitter:image" content="/images/my-super-image.png" >
+        <!--[if !IE 7]>
+        <style type="text/css">
+            #main-content {display:table;height:100%}
+        </style>
+        <![endif]-->
+        <link rel="stylesheet" href="http://www.lovacaoying.com/theme/css/backdrop.css" />
+        <link rel="stylesheet" href="http://www.lovacaoying.com/theme/css/pygments.css" />
+        <script src="http://www.lovacaoying.com/theme/js/modernizr.js"></script>
 
-        <title>Something about Loss Functions: 正篇（一）  - 从学习问题的形式化描述开始  · LCY Data Science Couple
-</title>
-        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="/theme/css/pygments.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="/theme/tipuesearch/tipuesearch.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="/theme/css/elegant.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="/theme/css/custom.css" media="screen">
+
     </head>
+      
+
     <body>
-        <div id="content-sans-footer">
-        <div class="navbar navbar-static-top">
-            <div class="navbar-inner">
-                <div class="container-fluid">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <a class="brand" href="/"><span class=site-name>LCY Data Science Couple</span></a>
-                    <div class="nav-collapse collapse">
-                        <ul class="nav pull-right top-menu">
-                            <li ><a href="">Home</a></li>
-                            <li ><a href="/categories.html">Categories</a></li>
-                            <li ><a href="/tags.html">Tags</a></li>
-                            <li ><a href="/archives.html">Archives</a></li>
-							<li ><a href="/skill.html">Skill Tree</a></li>
-                            <li><form class="navbar-search" action="/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+        <div class="master-row">
+
+            <div class="content-pane main-content">
+                <nav class="top-bar" data-topbar role="navigation">
+                    <ul class="title-area">
+                        <li class="name"><!-- Leave this empty --></li>
+                        <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+                    </ul>
+                    <section class="top-bar-section">
+                        <ul class="left">
                         </ul>
+                        <ul class="right">
+                            <li class="active"><a href="http://www.lovacaoying.com/category/machine-learning.html">Machine Learning</a></li>
+                            <li><a href="http://www.lovacaoying.com/category/neural-network.html">Neural Network</a></li>
+                            <li><a href="http://www.lovacaoying.com/category/python.html">Python</a></li>
+                            <li><a href="http://www.lovacaoying.com/category/tool.html">Tool</a></li>
+                        </ul>
+                    </section>
+                </nav>
+
+                <div class="row title-bar">
+                    <div class="small-12 columns">
+                        <h1><a href="http://www.lovacaoying.com">LCY Data Science Couple</a></h1><h2> <small>Welcome :-)</small></h2>
+                        <hr>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="container-fluid">
-            <div class="row-fluid">
-                <div class="span1"></div>
-                <div class="span10">
-<article>
-<div class="row-fluid">
-    <header class="page-header span10 offset2">
-    <h1><a href="/sth-about-loss-function-1.html"> Something about Loss Functions: 正篇（一）  <small> 从学习问题的形式化描述开始 </small>  </a></h1>
-    </header>
-</div>
-
-<div class="row-fluid">
-        <div class="span8 offset2 article-content">
-
             
+                <div id="contents">
+<div class="row">
+    <div class="small-12 columns article">
+        <h2>Something about Loss Functions: 正篇（一）</h2>
+        <div class="row info-bar" style="margin-left:0rem;margin-bottom:6px;">
+    <div class="small-12 columns">
+        <ul class="inline-list">
+            <li><span><i class="fa fa-calendar"></i>&nbsp; 周日 03 十月 2010</span></li>
+            <li><span><i class="fa fa-folder-open"></i>&nbsp; <a href="http://www.lovacaoying.com/category/machine-learning.html">Machine Learning</a></span></li>
+            <li>
+                <span>
+                    <i class="fa fa-tags"></i>&nbsp;
+                    <a href="http://www.lovacaoying.com/tag/boosting.html"><span class="label">Boosting</span></a>
+                    <a href="http://www.lovacaoying.com/tag/loss-function.html"><span class="label">Loss function</span></a>
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>
+        <section class="article">
             <p>---</p>
 <p>一切从学习算法和学习问题的形式化描述开始，这种观点可以解释许多学习算法。</p>
-<p><span class="math">
-\(X \subset R^N\)</span>
- 是 <em>N</em> 维输入空间，$Y$是输出空间，这里限定$Yin {-1,+1} $（首先研究二分类问题）。$mathcal {D} $是$Xtimes Y$上固定但未知的分布，训练样本集S $ { (x_1,y_1),(x_2,y_2),...,(x_n,y_n) } $依分布$ mathcal {D} $独立同分布产生（iid假设）。选择函数空间$F$，定义损失函数$L(y,f(x))$，学习算法从函数空间中选择一个$f_0$，使期望风险$eqref{1}$最小（也就是期望风险最小化准则）。</p>
+<p><span class="math">\(X \subset R^N\)</span> 是 <em>N</em> 维输入空间，$Y$是输出空间，这里限定$Yin {-1,+1} $（首先研究二分类问题）。$mathcal {D} $是$Xtimes Y$上固定但未知的分布，训练样本集S $ { (x_1,y_1),(x_2,y_2),...,(x_n,y_n) } $依分布$ mathcal {D} $独立同分布产生（iid假设）。选择函数空间$F$，定义损失函数$L(y,f(x))$，学习算法从函数空间中选择一个$f_0$，使期望风险$eqref{1}$最小（也就是期望风险最小化准则）。</p>
 <script type='text/javascript'>if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",
         indent = "0em",
@@ -138,63 +113,138 @@
         "}); ";
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-</script>
-            
-            
-            <hr/>
-        </div>
-        <section>
-        <div class="span2" style="float:right;font-size:0.9em;">
-            <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2010-10-03T10:20:00+08:00">十月 3, 2010</time>
-
-<h4>Last Updated</h4>
-<time datetime="2010-10-04T18:40:00+08:00">十月 4, 2010</time>
-
-            <h4>Category</h4>
-            <a class="category-link" href="/categories.html#machine-learning-ref">Machine Learning</a>
-            <h4>Tags</h4>
-            <ul class="list-of-tags tags-in-article">
-                <li><a href="/tags.html#boosting-ref">Boosting
-                    <span>1</span>
-</a></li>
-                <li><a href="/tags.html#loss-function-ref">Loss function
-                    <span>2</span>
-</a></li>
-            </ul>
-<h4>Contact</h4>
-    <a href="#" title="My You can add links in your config file Profile" class="sidebar-social-links" target="_blank">
-    <i class="fa fa-you can add links in your config file sidebar-social-links"></i></a>
-    <a href="#" title="My Another social link Profile" class="sidebar-social-links" target="_blank">
-    <i class="fa fa-another social link sidebar-social-links"></i></a>
-        </div>
+</script>    
         </section>
+    </div>
 </div>
-</article>
                 </div>
-                <div class="span1"></div>
+
+                <footer class="show-for-large-up">
+<div class="row">
+    <div class="small-6 medium-3 columns">
+        <ul class="left-nav">
+            <li><a href="http://www.lovacaoying.com">Home &nbsp;<i class="fa fa-home fa-fw"></i></a></li>
+            <li><a href="http://www.lovacaoying.com/categories.html">Categories &nbsp;<i class="fa fa-folder-open fa-fw"></i></a></li>
+        </ul>
+    </div>
+    <div class="small-6 medium-3 medium-push-6 columns">
+        <ul class="right-nav">
+            <li><a href="http://www.lovacaoying.com/archives.html"><i class="fa fa-archive fa-fw"></i>&nbsp; Archives</a></li>
+        </ul>
+    </div>
+    <div class="small-12 medium-6 medium-pull-3 columns text-center">
+        <p class="tag-cloud">
+            <a href="http://www.lovacaoying.com/tags.html"><i class="fa fa-tags"></i>&nbsp;Tags:</a>&nbsp;&nbsp;
+            <a href="http://www.lovacaoying.com/tag/mloss.html"><span class="label">MLOSS</span></a>
+            <a href="http://www.lovacaoying.com/tag/loss-function.html"><span class="label">Loss function</span></a>
+            <a href="http://www.lovacaoying.com/tag/noteexpress.html"><span class="label">NoteExpress</span></a>
+            <a href="http://www.lovacaoying.com/tag/wiz.html"><span class="label">Wiz</span></a>
+            <a href="http://www.lovacaoying.com/tag/python.html"><span class="label">Python</span></a>
+            <a href="http://www.lovacaoying.com/tag/onenote.html"><span class="label">OneNote</span></a>
+            <a href="http://www.lovacaoying.com/tag/machine-learning.html"><span class="label">Machine learning</span></a>
+            <a href="http://www.lovacaoying.com/tag/cnn.html"><span class="label">CNN</span></a>
+            <a href="http://www.lovacaoying.com/tag/mendeley.html"><span class="label">Mendeley</span></a>
+            <a href="http://www.lovacaoying.com/tag/whoosh.html"><span class="label">Whoosh</span></a>
+            <a href="http://www.lovacaoying.com/tag/neural-network.html"><span class="label">Neural Network</span></a>
+            <a href="http://www.lovacaoying.com/tag/cython.html"><span class="label">Cython</span></a>
+            <a href="http://www.lovacaoying.com/tag/coursera.html"><span class="label">Coursera</span></a>
+            <a href="http://www.lovacaoying.com/tag/deep-learning.html"><span class="label">Deep learning</span></a>
+            <a href="http://www.lovacaoying.com/tag/boosting.html"><span class="label">Boosting</span></a>
+            &nbsp;&hellip;
+        </p>
+    </div>
+    <div class="small-12 columns sub-footer">
+        <hr>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-left">
+                &copy;  LCY 
+                <!-- <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="cc.png" /></a>-->
+            </p>
+        </div>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-right">
+                Proudly powered by <a href="http://blog.getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="https://www.python.org/">Python</a>.
+            </p>
+        </div>
+    </div>
+</div>                </footer>
+            </div>
+            
+            <div class="image-pane main-content" style="background: url('images/background.jpg'); background-size:cover; background-position: right;">
+                <div class="row">
+                    <div class="small-12 medium-4 large-12 columns">
+                    </div>
+
+                    <div class="small-12 medium-4  large-12 columns link-list">
+                    </div>
+
+<!--
+                    <div class="small-12 medium-3 large-12 columns">
+                    </div>
+-->
+               </div>
             </div>
         </div>
-        <div id="push"></div>
+        
+        
+        <div class="row">
+            <footer class="hide-for-large-up">
+<div class="row">
+    <div class="small-6 medium-3 columns">
+        <ul class="left-nav">
+            <li><a href="http://www.lovacaoying.com">Home &nbsp;<i class="fa fa-home fa-fw"></i></a></li>
+            <li><a href="http://www.lovacaoying.com/categories.html">Categories &nbsp;<i class="fa fa-folder-open fa-fw"></i></a></li>
+        </ul>
     </div>
-<footer>
-<div id="footer">
-    <ul class="footer-content">
-        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
-    </ul>
-</div>
-</footer>            <script src="http://code.jquery.com/jquery.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-        <script>
-            function validateForm(query)
-            {
-                return (query.length > 0);
-            }
-        </script>
-
-    
+    <div class="small-6 medium-3 medium-push-6 columns">
+        <ul class="right-nav">
+            <li><a href="http://www.lovacaoying.com/archives.html"><i class="fa fa-archive fa-fw"></i>&nbsp; Archives</a></li>
+        </ul>
+    </div>
+    <div class="small-12 medium-6 medium-pull-3 columns text-center">
+        <p class="tag-cloud">
+            <a href="http://www.lovacaoying.com/tags.html"><i class="fa fa-tags"></i>&nbsp;Tags:</a>&nbsp;&nbsp;
+            <a href="http://www.lovacaoying.com/tag/mloss.html"><span class="label">MLOSS</span></a>
+            <a href="http://www.lovacaoying.com/tag/loss-function.html"><span class="label">Loss function</span></a>
+            <a href="http://www.lovacaoying.com/tag/noteexpress.html"><span class="label">NoteExpress</span></a>
+            <a href="http://www.lovacaoying.com/tag/wiz.html"><span class="label">Wiz</span></a>
+            <a href="http://www.lovacaoying.com/tag/python.html"><span class="label">Python</span></a>
+            <a href="http://www.lovacaoying.com/tag/onenote.html"><span class="label">OneNote</span></a>
+            <a href="http://www.lovacaoying.com/tag/machine-learning.html"><span class="label">Machine learning</span></a>
+            <a href="http://www.lovacaoying.com/tag/cnn.html"><span class="label">CNN</span></a>
+            <a href="http://www.lovacaoying.com/tag/mendeley.html"><span class="label">Mendeley</span></a>
+            <a href="http://www.lovacaoying.com/tag/whoosh.html"><span class="label">Whoosh</span></a>
+            <a href="http://www.lovacaoying.com/tag/neural-network.html"><span class="label">Neural Network</span></a>
+            <a href="http://www.lovacaoying.com/tag/cython.html"><span class="label">Cython</span></a>
+            <a href="http://www.lovacaoying.com/tag/coursera.html"><span class="label">Coursera</span></a>
+            <a href="http://www.lovacaoying.com/tag/deep-learning.html"><span class="label">Deep learning</span></a>
+            <a href="http://www.lovacaoying.com/tag/boosting.html"><span class="label">Boosting</span></a>
+            &nbsp;&hellip;
+        </p>
+    </div>
+    <div class="small-12 columns sub-footer">
+        <hr>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-left">
+                &copy;  LCY 
+                <!-- <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="cc.png" /></a>-->
+            </p>
+        </div>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-right">
+                Proudly powered by <a href="http://blog.getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="https://www.python.org/">Python</a>.
+            </p>
+        </div>
+    </div>
+</div>            </footer>
+        </div>
+        
+        
+        <script src="http://www.lovacaoying.com/theme/js/jquery.min.js"></script>
+        <script src="http://www.lovacaoying.com/theme/js/foundation.min.js"></script>
+        <script src="http://www.lovacaoying.com/theme/js/app.js"></script>
     </body>
-    <!-- Theme: Elegant built for Pelican
-    License : http://oncrashreboot.com/pelican-elegant -->
-</body>
+  
 </html>

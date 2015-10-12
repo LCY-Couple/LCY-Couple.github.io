@@ -1,100 +1,77 @@
-<!DOCTYPE html>
-<html lang="en-US">
-<body background="images/background.png">
+<!doctype html>
+<html class="no-js" lang="en">
     <head>
-        <meta charset="utf-8"> 
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="author" content="LCY.Hugepanda" />
-        <meta name="copyright" content="LCY.Hugepanda" />
-		
-<head>
-    <style>
-        .bannerbox {
-            width:100%;
-            position:relative;
-            overflow:hidden;
-            height:140px;
-        }
-        .banner {
-            width:1500px;
-            position:absolute;
-            left:50%;
-            margin-left:-800px;
-        }
-    </style>
-</head>
-<body>
-    <div class="bannerbox">
-        <div class="banner">
-            <img src="images\\LCYbanner.png">
-        </div>
-    </div> 
-</body>
-        <meta property="og:type" content="article" />
-        <meta name="twitter:card" content="summary">
+        <link rel="shortcut icon" href="" />
 
-<meta name="keywords" content="Python, Cython, Python, " />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="LCY" />
+        <title>使用Cython加速Python程序执行</title>
+        
+<meta name="description" content="本文就使用Cython做一个简单的例子，说明如何使用C和Python的混合达到优化Python程序的目的。" />
+<meta name="keywords" content=" Python Cython  "/>
 
-<meta property="og:title" content="使用Cython加速Python程序执行 "/>
-<meta property="og:url" content="/shi-yong-cythonjia-su-pythoncheng-xu-zhi-xing.html" />
-<meta property="og:description" content="用Cython加速Python程序的一个简单例子¶ Python是我们非常喜欢的一种语言，我们的LOGO中的“L”就是一条代表了Python的蛇 :) 然而，由于Python本身的语言特性，使得它在特定的情况下会出现速度瓶颈，本文就使用Cython做一个简单的例子，说明如何使用C和Python的混合（这大概并不是精确意义下的混合编程）达到优化Python程序的目的。 几点说明：¶ 本文大量参考了参考文献[1] 本文的写作环境使用Python 2.7, IPython Notebook 1.1.0, Cython 0.17.2和Windows 7 64bit 为了展示方便，本文并没有描述如何在实际开发环境中编译和使用Cython模块，请参考官方文档（http://docs.cython.org/src/tutorial/cython_tutorial.html） Cython、Numba、PyPy等都可以用于优化Python程序的运行效率，numpy等专门进行科学计算的模块本身也会有优化，请不要把自己的思路限制在这里 Cython实际上是一种新的编程语言，主要用于开发Python扩展模块，我们基于Cython所做的优化，本质是使用了Cython这种编程语言编写了融合C和Python风格的程序，然后通过编译称为程序模块 ..." />
-<meta property="og:site_name" content="LCY Data Science Couple" />
-<meta property="og:article:author" content="LCY.Hugepanda" />
-<meta property="og:article:published_time" content="2015-04-14T13:02:00+08:00" />
-<meta name="twitter:title" content="使用Cython加速Python程序执行 ">
-<meta name="twitter:description" content="用Cython加速Python程序的一个简单例子¶ Python是我们非常喜欢的一种语言，我们的LOGO中的“L”就是一条代表了Python的蛇 :) 然而，由于Python本身的语言特性，使得它在特定的情况下会出现速度瓶颈，本文就使用Cython做一个简单的例子，说明如何使用C和Python的混合（这大概并不是精确意义下的混合编程）达到优化Python程序的目的。 几点说明：¶ 本文大量参考了参考文献[1] 本文的写作环境使用Python 2.7, IPython Notebook 1.1.0, Cython 0.17.2和Windows 7 64bit 为了展示方便，本文并没有描述如何在实际开发环境中编译和使用Cython模块，请参考官方文档（http://docs.cython.org/src/tutorial/cython_tutorial.html） Cython、Numba、PyPy等都可以用于优化Python程序的运行效率，numpy等专门进行科学计算的模块本身也会有优化，请不要把自己的思路限制在这里 Cython实际上是一种新的编程语言，主要用于开发Python扩展模块，我们基于Cython所做的优化，本质是使用了Cython这种编程语言编写了融合C和Python风格的程序，然后通过编译称为程序模块 ...">
-<meta property="og:image" content="images/150414-feature.png" />
-<meta name="twitter:image" content="images/150414-feature.png" >
+        <!--[if !IE 7]>
+        <style type="text/css">
+            #main-content {display:table;height:100%}
+        </style>
+        <![endif]-->
+        <link rel="stylesheet" href="http://www.lovacaoying.com/theme/css/backdrop.css" />
+        <link rel="stylesheet" href="http://www.lovacaoying.com/theme/css/pygments.css" />
+        <script src="http://www.lovacaoying.com/theme/js/modernizr.js"></script>
 
-        <title>使用Cython加速Python程序执行  · LCY Data Science Couple
-</title>
-        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="/theme/css/pygments.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="/theme/tipuesearch/tipuesearch.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="/theme/css/elegant.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="/theme/css/custom.css" media="screen">
+
     </head>
+      
+
     <body>
-        <div id="content-sans-footer">
-        <div class="navbar navbar-static-top">
-            <div class="navbar-inner">
-                <div class="container-fluid">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <a class="brand" href="/"><span class=site-name>LCY Data Science Couple</span></a>
-                    <div class="nav-collapse collapse">
-                        <ul class="nav pull-right top-menu">
-                            <li ><a href="">Home</a></li>
-                            <li ><a href="/categories.html">Categories</a></li>
-                            <li ><a href="/tags.html">Tags</a></li>
-                            <li ><a href="/archives.html">Archives</a></li>
-							<li ><a href="/skill.html">Skill Tree</a></li>
-                            <li><form class="navbar-search" action="/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+        <div class="master-row">
+
+            <div class="content-pane main-content">
+                <nav class="top-bar" data-topbar role="navigation">
+                    <ul class="title-area">
+                        <li class="name"><!-- Leave this empty --></li>
+                        <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+                    </ul>
+                    <section class="top-bar-section">
+                        <ul class="left">
                         </ul>
+                        <ul class="right">
+                            <li><a href="http://www.lovacaoying.com/category/machine-learning.html">Machine Learning</a></li>
+                            <li><a href="http://www.lovacaoying.com/category/neural-network.html">Neural Network</a></li>
+                            <li class="active"><a href="http://www.lovacaoying.com/category/python.html">Python</a></li>
+                            <li><a href="http://www.lovacaoying.com/category/tool.html">Tool</a></li>
+                        </ul>
+                    </section>
+                </nav>
+
+                <div class="row title-bar">
+                    <div class="small-12 columns">
+                        <h1><a href="http://www.lovacaoying.com">LCY Data Science Couple</a></h1><h2> <small>Welcome :-)</small></h2>
+                        <hr>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="container-fluid">
-            <div class="row-fluid">
-                <div class="span1"></div>
-                <div class="span10">
-<article>
-<div class="row-fluid">
-    <header class="page-header span10 offset2">
-    <h1><a href="/shi-yong-cythonjia-su-pythoncheng-xu-zhi-xing.html"> 使用Cython加速Python程序执行  </a></h1>
-    </header>
-</div>
-
-<div class="row-fluid">
-        <div class="span8 offset2 article-content">
-
             
+                <div id="contents">
+<div class="row">
+    <div class="small-12 columns article">
+        <h2>使用Cython加速Python程序执行</h2>
+        <div class="row info-bar" style="margin-left:0rem;margin-bottom:6px;">
+    <div class="small-12 columns">
+        <ul class="inline-list">
+            <li><span><i class="fa fa-calendar"></i>&nbsp; 周二 14 四月 2015</span></li>
+            <li><span><i class="fa fa-folder-open"></i>&nbsp; <a href="http://www.lovacaoying.com/category/python.html">Python</a></span></li>
+            <li>
+                <span>
+                    <i class="fa fa-tags"></i>&nbsp;
+                    <a href="http://www.lovacaoying.com/tag/python.html"><span class="label">Python</span></a>
+                    <a href="http://www.lovacaoying.com/tag/cython.html"><span class="label">Cython</span></a>
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>
+        <section class="article">
             
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
@@ -104,7 +81,6 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="用Cython加速Python程序的一个简单例子">&#29992;Cython&#21152;&#36895;Python&#31243;&#24207;&#30340;&#19968;&#20010;&#31616;&#21333;&#20363;&#23376;<a class="anchor-link" href="#用Cython加速Python程序的一个简单例子">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -371,59 +347,138 @@ for i in xrange(500000):
 </div>
     </div>
   </div>
-
-            
-            
-            <hr/>
-        </div>
-        <section>
-        <div class="span2" style="float:right;font-size:0.9em;">
-            <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2015-04-14T13:02:00+08:00">四月 14, 2015</time>
-            <h4>Category</h4>
-            <a class="category-link" href="/categories.html#python-ref">Python</a>
-            <h4>Tags</h4>
-            <ul class="list-of-tags tags-in-article">
-                <li><a href="/tags.html#cython-ref">Cython
-                    <span>1</span>
-</a></li>
-                <li><a href="/tags.html#python-ref">Python
-                    <span>3</span>
-</a></li>
-            </ul>
-<h4>Contact</h4>
-    <a href="#" title="My You can add links in your config file Profile" class="sidebar-social-links" target="_blank">
-    <i class="fa fa-you can add links in your config file sidebar-social-links"></i></a>
-    <a href="#" title="My Another social link Profile" class="sidebar-social-links" target="_blank">
-    <i class="fa fa-another social link sidebar-social-links"></i></a>
-        </div>
+    
         </section>
+    </div>
 </div>
-</article>
                 </div>
-                <div class="span1"></div>
+
+                <footer class="show-for-large-up">
+<div class="row">
+    <div class="small-6 medium-3 columns">
+        <ul class="left-nav">
+            <li><a href="http://www.lovacaoying.com">Home &nbsp;<i class="fa fa-home fa-fw"></i></a></li>
+            <li><a href="http://www.lovacaoying.com/categories.html">Categories &nbsp;<i class="fa fa-folder-open fa-fw"></i></a></li>
+        </ul>
+    </div>
+    <div class="small-6 medium-3 medium-push-6 columns">
+        <ul class="right-nav">
+            <li><a href="http://www.lovacaoying.com/archives.html"><i class="fa fa-archive fa-fw"></i>&nbsp; Archives</a></li>
+        </ul>
+    </div>
+    <div class="small-12 medium-6 medium-pull-3 columns text-center">
+        <p class="tag-cloud">
+            <a href="http://www.lovacaoying.com/tags.html"><i class="fa fa-tags"></i>&nbsp;Tags:</a>&nbsp;&nbsp;
+            <a href="http://www.lovacaoying.com/tag/mloss.html"><span class="label">MLOSS</span></a>
+            <a href="http://www.lovacaoying.com/tag/loss-function.html"><span class="label">Loss function</span></a>
+            <a href="http://www.lovacaoying.com/tag/noteexpress.html"><span class="label">NoteExpress</span></a>
+            <a href="http://www.lovacaoying.com/tag/wiz.html"><span class="label">Wiz</span></a>
+            <a href="http://www.lovacaoying.com/tag/python.html"><span class="label">Python</span></a>
+            <a href="http://www.lovacaoying.com/tag/onenote.html"><span class="label">OneNote</span></a>
+            <a href="http://www.lovacaoying.com/tag/machine-learning.html"><span class="label">Machine learning</span></a>
+            <a href="http://www.lovacaoying.com/tag/cnn.html"><span class="label">CNN</span></a>
+            <a href="http://www.lovacaoying.com/tag/mendeley.html"><span class="label">Mendeley</span></a>
+            <a href="http://www.lovacaoying.com/tag/whoosh.html"><span class="label">Whoosh</span></a>
+            <a href="http://www.lovacaoying.com/tag/neural-network.html"><span class="label">Neural Network</span></a>
+            <a href="http://www.lovacaoying.com/tag/cython.html"><span class="label">Cython</span></a>
+            <a href="http://www.lovacaoying.com/tag/coursera.html"><span class="label">Coursera</span></a>
+            <a href="http://www.lovacaoying.com/tag/deep-learning.html"><span class="label">Deep learning</span></a>
+            <a href="http://www.lovacaoying.com/tag/boosting.html"><span class="label">Boosting</span></a>
+            &nbsp;&hellip;
+        </p>
+    </div>
+    <div class="small-12 columns sub-footer">
+        <hr>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-left">
+                &copy;  LCY 
+                <!-- <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="cc.png" /></a>-->
+            </p>
+        </div>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-right">
+                Proudly powered by <a href="http://blog.getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="https://www.python.org/">Python</a>.
+            </p>
+        </div>
+    </div>
+</div>                </footer>
+            </div>
+            
+            <div class="image-pane main-content" style="background: url('images/background.jpg'); background-size:cover; background-position: right;">
+                <div class="row">
+                    <div class="small-12 medium-4 large-12 columns">
+                    </div>
+
+                    <div class="small-12 medium-4  large-12 columns link-list">
+                    </div>
+
+<!--
+                    <div class="small-12 medium-3 large-12 columns">
+                    </div>
+-->
+               </div>
             </div>
         </div>
-        <div id="push"></div>
+        
+        
+        <div class="row">
+            <footer class="hide-for-large-up">
+<div class="row">
+    <div class="small-6 medium-3 columns">
+        <ul class="left-nav">
+            <li><a href="http://www.lovacaoying.com">Home &nbsp;<i class="fa fa-home fa-fw"></i></a></li>
+            <li><a href="http://www.lovacaoying.com/categories.html">Categories &nbsp;<i class="fa fa-folder-open fa-fw"></i></a></li>
+        </ul>
     </div>
-<footer>
-<div id="footer">
-    <ul class="footer-content">
-        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
-    </ul>
-</div>
-</footer>            <script src="http://code.jquery.com/jquery.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-        <script>
-            function validateForm(query)
-            {
-                return (query.length > 0);
-            }
-        </script>
-
-    
+    <div class="small-6 medium-3 medium-push-6 columns">
+        <ul class="right-nav">
+            <li><a href="http://www.lovacaoying.com/archives.html"><i class="fa fa-archive fa-fw"></i>&nbsp; Archives</a></li>
+        </ul>
+    </div>
+    <div class="small-12 medium-6 medium-pull-3 columns text-center">
+        <p class="tag-cloud">
+            <a href="http://www.lovacaoying.com/tags.html"><i class="fa fa-tags"></i>&nbsp;Tags:</a>&nbsp;&nbsp;
+            <a href="http://www.lovacaoying.com/tag/mloss.html"><span class="label">MLOSS</span></a>
+            <a href="http://www.lovacaoying.com/tag/loss-function.html"><span class="label">Loss function</span></a>
+            <a href="http://www.lovacaoying.com/tag/noteexpress.html"><span class="label">NoteExpress</span></a>
+            <a href="http://www.lovacaoying.com/tag/wiz.html"><span class="label">Wiz</span></a>
+            <a href="http://www.lovacaoying.com/tag/python.html"><span class="label">Python</span></a>
+            <a href="http://www.lovacaoying.com/tag/onenote.html"><span class="label">OneNote</span></a>
+            <a href="http://www.lovacaoying.com/tag/machine-learning.html"><span class="label">Machine learning</span></a>
+            <a href="http://www.lovacaoying.com/tag/cnn.html"><span class="label">CNN</span></a>
+            <a href="http://www.lovacaoying.com/tag/mendeley.html"><span class="label">Mendeley</span></a>
+            <a href="http://www.lovacaoying.com/tag/whoosh.html"><span class="label">Whoosh</span></a>
+            <a href="http://www.lovacaoying.com/tag/neural-network.html"><span class="label">Neural Network</span></a>
+            <a href="http://www.lovacaoying.com/tag/cython.html"><span class="label">Cython</span></a>
+            <a href="http://www.lovacaoying.com/tag/coursera.html"><span class="label">Coursera</span></a>
+            <a href="http://www.lovacaoying.com/tag/deep-learning.html"><span class="label">Deep learning</span></a>
+            <a href="http://www.lovacaoying.com/tag/boosting.html"><span class="label">Boosting</span></a>
+            &nbsp;&hellip;
+        </p>
+    </div>
+    <div class="small-12 columns sub-footer">
+        <hr>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-left">
+                &copy;  LCY 
+                <!-- <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="cc.png" /></a>-->
+            </p>
+        </div>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-right">
+                Proudly powered by <a href="http://blog.getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="https://www.python.org/">Python</a>.
+            </p>
+        </div>
+    </div>
+</div>            </footer>
+        </div>
+        
+        
+        <script src="http://www.lovacaoying.com/theme/js/jquery.min.js"></script>
+        <script src="http://www.lovacaoying.com/theme/js/foundation.min.js"></script>
+        <script src="http://www.lovacaoying.com/theme/js/app.js"></script>
     </body>
-    <!-- Theme: Elegant built for Pelican
-    License : http://oncrashreboot.com/pelican-elegant -->
-</body>
+  
 </html>
